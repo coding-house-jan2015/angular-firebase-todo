@@ -1,0 +1,36 @@
+h1 Todos
+
+.row
+  .col-xs-4
+    form(name='todoForm', novalidate)
+      .form-group
+        label(for='title') Title
+        input.form-control(type='text', name='title', ng-model='todo.title')
+      .form-group
+        label(for='due') Due
+        input.form-control(type='date', name='due', ng-model='todo.due')
+      .form-group
+        label(for='priority') Priority
+        select.form-control(name='priority', ng-init='todo.priority="High"', ng-model='todo.priority')
+          option High
+          option Medium
+          option Low
+      .form-group
+          button.btn.btn-default(type='submit', ng-click='add()') Add Todo
+  .col-xs-8
+
+.row
+  .col-xs-12
+    table.table.table-hover.table-striped
+      thead
+        tr
+          th Complete?
+          th Title
+          th Due
+          th Priority
+      tbody
+        tr(ng-repeat='todo in todos', ng-class='{complete:todo.isComplete}')
+          td: input(type='checkbox', ng-model='todo.isComplete', ng-click='update(todo)')
+          td {{todo.title}}
+          td {{moment(todo.due).format('MMMM Do YYYY')}}
+          td: pre {{todo | json}}
