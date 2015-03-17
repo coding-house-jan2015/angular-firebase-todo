@@ -1,4 +1,4 @@
-/* global Firebase:true */
+/* global Firebase:true, moment:true */
 
 'use strict';
 
@@ -6,6 +6,7 @@ angular.module('angular-prototype')
 .controller('TodosCtrl', ['$scope', '$firebaseArray', function($scope, $firebaseArray){
   var todos = new Firebase('https://angular-fb-todo.firebaseio.com/todos');
   $scope.todos = $firebaseArray(todos);
+  $scope.moment = moment;
 
   $scope.update = function(todo){
     $scope.todos.$save(todo);
